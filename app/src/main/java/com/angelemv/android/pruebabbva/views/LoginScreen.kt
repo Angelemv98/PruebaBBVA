@@ -1,5 +1,6 @@
 package com.angelemv.android.pruebabbva.views
 
+import UserPreferencesManager
 import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
@@ -18,6 +19,7 @@ import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -34,7 +36,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.angelemv.android.pruebabbva.R
-import com.angelemv.android.pruebabbva.model.UserPreferencesManager
 import com.angelemv.android.pruebabbva.model.navigation.AppScreens
 import com.angelemv.android.pruebabbva.viewmodel.ViewModel
 
@@ -46,6 +47,8 @@ fun LoginScreen(nav: NavHostController, viewModel: ViewModel) {
     val isFormValid = email.value.isNotEmpty() && password.value.isNotEmpty()
     val showErrorDialog = rememberSaveable { mutableStateOf(false) }
     val userPreferencesManager = remember { UserPreferencesManager(context) }
+    val loginResponse = viewModel.loginResponse.observeAsState()
+
 
     if (showErrorDialog.value) {
         ErrorDialog(
@@ -72,7 +75,7 @@ fun LoginScreen(nav: NavHostController, viewModel: ViewModel) {
 
         Button(
             onClick = {
-                viewModel.login("username", email.value, password.value)
+                viewModel.login("defauluser",email.value, password.value)
                 Toast.makeText(context, "Iniciando sesión...", Toast.LENGTH_SHORT).show()
             },
             modifier = Modifier
@@ -83,13 +86,12 @@ fun LoginScreen(nav: NavHostController, viewModel: ViewModel) {
             Text("Iniciar Sesión", fontSize = 18.sp)
         }
 
-        viewModel.loginResponse.observeAsState().value?.let { response ->
-            LaunchedEffect(response) {
-                userPreferencesManager.setLoggedIn(true)
-                nav.popBackStack()
-                nav.navigate(AppScreens.DashBoardScreen.route)
+        LaunchedEffect(loginResponse.value) {
+            if (loginResponse.value != null) {
+                viewModel.loginSucces(nav)
             }
         }
+
         viewModel.error.observeAsState().value?.let { error ->
             showErrorDialog.value = true
         }
@@ -135,8 +137,9 @@ fun GenericEditText(
             .padding(vertical = 8.dp)
     )
 }
+
 @Preview(showBackground = true)
 @Composable
 fun LoginScreenPreview() {
-    LoginScreen(nav = NavHostController(context = LocalContext.current), viewModel = ViewModel())
+    LoginScreen(nav = NavHostController(context = LocalContext.current), viewModel = ViewModel(context = LocalContext.current))
 }

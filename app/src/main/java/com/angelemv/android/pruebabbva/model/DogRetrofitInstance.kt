@@ -5,19 +5,20 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-object RetrofitInstance {
-    private const val BASE_URL = "https://private-6eaf4c-examenbbva.apiary-mock.com/"
+
+object DogRetrofitInstance {
+    private const val BASE_URL = "https://dog.ceo/api/"
 
     val client = OkHttpClient.Builder()
         .addInterceptor(HttpLoggingInterceptor().apply {
             level = HttpLoggingInterceptor.Level.BODY
         }).build()
 
-    val retrofit = Retrofit.Builder()
-        .baseUrl(BASE_URL)
-        .client(client)
-        .addConverterFactory(GsonConverterFactory.create())
-        .build()
-
-    val api: ApiService = retrofit.create(ApiService::class.java)
+    val api: DogApiService by lazy {
+        Retrofit.Builder()
+            .baseUrl(BASE_URL)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+            .create(DogApiService::class.java)
+    }
 }

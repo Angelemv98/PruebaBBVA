@@ -5,7 +5,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.angelemv.android.pruebabbva.viewmodel.ViewModel
-import com.angelemv.android.pruebabbva.views.DashBoardView
+import com.angelemv.android.pruebabbva.views.DashBoard
 import com.angelemv.android.pruebabbva.views.LoginScreen
 import com.angelemv.android.pruebabbva.views.SplashScreen
 
@@ -17,10 +17,10 @@ fun AppNavigation(){
             SplashScreen(navController)
         }
         composable(route = AppScreens.LoginScreen.route){
-            LoginScreen(navController, ViewModel())
+            LoginScreen(navController, ViewModel(navController.context))
         }
         composable(route = AppScreens.DashBoardScreen.route){
-            DashBoardView(navController)
+            DashBoard(navController, ViewModel(navController.context))
         }
 
     }

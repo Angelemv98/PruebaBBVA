@@ -8,7 +8,7 @@ data class LoginRequest(
 
 data class LoginResponse(
     val name: String,
-    val lastname: String,
+    val lastName: String,
     val id: String,
     val gender: String,
     val age: Int

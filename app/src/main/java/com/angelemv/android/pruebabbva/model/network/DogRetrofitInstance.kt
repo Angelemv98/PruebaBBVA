@@ -1,4 +1,4 @@
-package com.angelemv.android.pruebabbva.model
+package com.angelemv.android.pruebabbva.model.network
 
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor

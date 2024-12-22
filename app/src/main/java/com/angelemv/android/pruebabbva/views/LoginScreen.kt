@@ -13,6 +13,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.TextField
@@ -26,6 +27,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.input.KeyboardType
@@ -81,7 +83,11 @@ fun LoginScreen(nav: NavHostController, viewModel: ViewModel) {
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(vertical = 16.dp),
-            enabled = isFormValid
+            enabled = isFormValid,
+            colors = ButtonDefaults.buttonColors(
+                containerColor = Color(0x8F3F51B5), // Cambia el color de fondo del botón
+                contentColor = Color.White // Cambia el color del texto
+            )
         ) {
             Text("Iniciar Sesión", fontSize = 18.sp)
         }

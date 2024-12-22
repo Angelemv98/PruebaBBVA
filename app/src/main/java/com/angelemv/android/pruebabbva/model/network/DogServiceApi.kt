@@ -1,4 +1,4 @@
-package com.angelemv.android.pruebabbva.model
+package com.angelemv.android.pruebabbva.model.network
 
 import retrofit2.Response
 import retrofit2.http.GET

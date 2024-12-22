@@ -8,17 +8,13 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.NavHostController
-import com.angelemv.android.pruebabbva.model.ApiService
-import com.angelemv.android.pruebabbva.model.DogResponse
-import com.angelemv.android.pruebabbva.model.DogRetrofitInstance
+import com.angelemv.android.pruebabbva.model.network.DogResponse
+import com.angelemv.android.pruebabbva.model.network.DogRetrofitInstance
 import com.angelemv.android.pruebabbva.model.LoginRequest
 import com.angelemv.android.pruebabbva.model.LoginResponse
-import com.angelemv.android.pruebabbva.model.RetrofitInstance
+import com.angelemv.android.pruebabbva.model.network.RetrofitInstance
 import com.angelemv.android.pruebabbva.model.navigation.AppScreens
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
@@ -31,7 +27,6 @@ class ViewModel(context: Context) : ViewModel() {
     private val _error = MutableLiveData<String?>()
     val error: LiveData<String?> get() = _error
 
-    // Datos de login desde DataStore
     private val _loginResponse = MutableLiveData<LoginResponse?>()
     val loginResponse: LiveData<LoginResponse?> get() = _loginResponse
 
@@ -78,7 +73,6 @@ class ViewModel(context: Context) : ViewModel() {
                         withContext(Dispatchers.Main) {
                             _dogImage.value = dogResponse
                             Log.d("dog", "Datos cargados: $dogResponse")
-
                         }
                     }
                 } else {
@@ -93,6 +87,7 @@ class ViewModel(context: Context) : ViewModel() {
             }
         }
     }
+
 
     fun logout(nav: NavHostController) {
         viewModelScope.launch {

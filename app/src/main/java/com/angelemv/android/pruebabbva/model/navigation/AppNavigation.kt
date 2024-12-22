@@ -1,5 +1,6 @@
 package com.angelemv.android.pruebabbva.model.navigation
 
+import UserPreferencesManager
 import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -14,7 +15,7 @@ fun AppNavigation(){
     val navController = rememberNavController()
     NavHost(navController = navController, startDestination = AppScreens.SplashScreen.route){
         composable(route = AppScreens.SplashScreen.route){
-            SplashScreen(navController)
+            SplashScreen(navController, UserPreferencesManager(navController.context))
         }
         composable(route = AppScreens.LoginScreen.route){
             LoginScreen(navController, ViewModel(navController.context))

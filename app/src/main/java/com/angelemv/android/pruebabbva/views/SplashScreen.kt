@@ -1,5 +1,6 @@
 package com.angelemv.android.pruebabbva.views
 
+import UserPreferencesManager
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -11,6 +12,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
@@ -25,14 +27,22 @@ import com.angelemv.android.pruebabbva.model.navigation.AppScreens
 import kotlinx.coroutines.delay
 
 @Composable
-fun SplashScreen(nav: NavHostController) {
-    LaunchedEffect(key1 = true) {
-        delay(3000)
-        nav.popBackStack()
-        nav.navigate(AppScreens.LoginScreen.route)
+fun SplashScreen(nav: NavHostController, userPreferencesManager: UserPreferencesManager) {
+    val isLoggedIn = userPreferencesManager.isLoggedIn.collectAsState(initial = false)
+
+    LaunchedEffect(key1 = isLoggedIn.value) {
+        delay(2000)
+        if (isLoggedIn.value) {
+            nav.popBackStack()
+            nav.navigate(AppScreens.DashBoardScreen.route)
+        } else {
+            nav.popBackStack()
+            nav.navigate(AppScreens.LoginScreen.route)
+        }
     }
     Splash()
 }
+
 
 
 @Composable

@@ -1,6 +1,5 @@
 package com.angelemv.android.pruebabbva.views
 
-import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -29,19 +28,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.buildAnnotatedString
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.compose.ui.viewinterop.AndroidView
 import androidx.navigation.NavHostController
 import coil.compose.AsyncImage
-import com.angelemv.android.pruebabbva.R
 import com.angelemv.android.pruebabbva.viewmodel.ViewModel
-import java.time.format.TextStyle
 
 
 @Composable
@@ -127,11 +120,11 @@ fun DashBoard(nav: NavHostController, viewModel: ViewModel) {
         if (showDialog) {
             LogoutConfirmationDialog(
                 onConfirm = {
-                    showDialog = false // Cierra el diálogo
-                    viewModel.logout(nav) // Llama al método de logout
+                    showDialog = false
+                    viewModel.logout(nav)
                 },
                 onDismiss = {
-                    showDialog = false // Solo cierra el diálogo si se cancela
+                    showDialog = false
                 }
             )
         }
@@ -139,8 +132,8 @@ fun DashBoard(nav: NavHostController, viewModel: ViewModel) {
         if (showErrorDialog) {
             ImageErrorDialog(
                 onDismiss = {
-                    showErrorDialog = false // Cierra el diálogo de error
-                    viewModel.clearError() // Limpia el error
+                    showErrorDialog = false
+                    viewModel.clearError()
                 }
             )
         }

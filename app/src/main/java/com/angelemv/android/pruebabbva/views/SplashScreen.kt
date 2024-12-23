@@ -59,7 +59,7 @@ fun Splash() {
         )
         Spacer(modifier = Modifier.height(46.dp))
         Text(
-            " Prueba BBVA \n Morales Varela Angel Ernesto",
+            " Prueba Técnica \n Morales Varela Angel Ernesto",
             fontSize = 30.sp,
             fontWeight = FontWeight.Thin,
             textAlign = TextAlign.Center,

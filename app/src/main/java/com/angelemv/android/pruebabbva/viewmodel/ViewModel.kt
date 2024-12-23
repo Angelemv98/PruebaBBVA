@@ -3,6 +3,9 @@ package com.angelemv.android.pruebabbva.viewmodel
 import UserPreferencesManager
 import android.content.Context
 import android.util.Log
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -25,7 +28,8 @@ class ViewModel(context: Context) : ViewModel() {
     val dogImage: LiveData<DogResponse?> get() = _dogImage
 
     private val _error = MutableLiveData<String?>()
-    val error: LiveData<String?> get() = _error
+    var errorMessage by mutableStateOf<String?>(null)
+        private set
 
     private val _loginResponse = MutableLiveData<LoginResponse?>()
     val loginResponse: LiveData<LoginResponse?> get() = _loginResponse
@@ -44,7 +48,6 @@ class ViewModel(context: Context) : ViewModel() {
                 val response = RetrofitInstance.api.login(request)
                 if (response.isSuccessful) {
                     response.body()?.let { loginResponse ->
-                        // Guardamos los datos del login en DataStore
                         withContext(Dispatchers.Main) {
                             userPreferencesManager.saveUserData(loginResponse)
                             _loginResponse.postValue(loginResponse)
@@ -53,12 +56,12 @@ class ViewModel(context: Context) : ViewModel() {
                     }
                 } else {
                     withContext(Dispatchers.Main) {
-                        _error.postValue("Error: ${response.message()}")
+                        errorMessage = "Error al iniciar sesión, Intentalo mas tarde"
                     }
                 }
             } catch (e: Exception) {
                 withContext(Dispatchers.Main) {
-                    _error.postValue(e.message)
+                    errorMessage = "Error: ${e.localizedMessage}"
                 }
             }
         }
@@ -71,22 +74,24 @@ class ViewModel(context: Context) : ViewModel() {
                 if (response.isSuccessful) {
                     response.body()?.let { dogResponse ->
                         withContext(Dispatchers.Main) {
-                            _dogImage.value = dogResponse
-                            Log.d("dog", "Datos cargados: $dogResponse")
+                            _dogImage.postValue(dogResponse)
                         }
                     }
                 } else {
                     withContext(Dispatchers.Main) {
-                        _error.value = "Error: ${response.message()}"
+                        errorMessage = "Error al cargar la imagen: ${response.code()}"
+                        Log.e("DogImageError", errorMessage!!)
                     }
                 }
             } catch (e: Exception) {
                 withContext(Dispatchers.Main) {
-                    _error.value = e.message
+                    errorMessage = "Error: ${e.localizedMessage}"
+                    Log.e("DogImageError", errorMessage!!)
                 }
             }
         }
     }
+
 
 
     fun logout(nav: NavHostController) {
@@ -106,5 +111,7 @@ class ViewModel(context: Context) : ViewModel() {
         }
     }
 
-
+    fun clearError() {
+        errorMessage = null
+    }
 }

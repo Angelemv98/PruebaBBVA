@@ -18,7 +18,8 @@ Sigue estos pasos para configurar el proyecto en tu entorno local:
 
 1. Clona el repositorio:
    ```bash
-   [git clone https://github.com/Angelemv98/PruebaSPSAEMV.git](https://github.com/Angelemv98/PruebaBBVA)
+   [git clone https://github.com/Angelemv98/PruebaBBVA.git ]
+   
 2. Abre AndroidStudio y selecciona la ruta donde se ha clonado el repositorio
 
 ## Recomendación

@@ -32,11 +32,10 @@ fun SplashScreen(nav: NavHostController, userPreferencesManager: UserPreferences
 
     LaunchedEffect(key1 = isLoggedIn.value) {
         delay(2000)
+        nav.popBackStack()
         if (isLoggedIn.value) {
-            nav.popBackStack()
             nav.navigate(AppScreens.DashBoardScreen.route)
         } else {
-            nav.popBackStack()
             nav.navigate(AppScreens.LoginScreen.route)
         }
     }

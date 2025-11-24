@@ -11,12 +11,12 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.NavHostController
-import com.angelemv.android.pruebabbva.model.network.DogResponse
-import com.angelemv.android.pruebabbva.model.network.DogRetrofitInstance
 import com.angelemv.android.pruebabbva.model.LoginRequest
 import com.angelemv.android.pruebabbva.model.LoginResponse
-import com.angelemv.android.pruebabbva.model.network.RetrofitInstance
 import com.angelemv.android.pruebabbva.model.navigation.AppScreens
+import com.angelemv.android.pruebabbva.model.network.DogResponse
+import com.angelemv.android.pruebabbva.model.network.DogRetrofitInstance
+import com.angelemv.android.pruebabbva.model.network.RetrofitInstance
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -51,7 +51,6 @@ class ViewModel(context: Context) : ViewModel() {
                         withContext(Dispatchers.Main) {
                             userPreferencesManager.saveUserData(loginResponse)
                             _loginResponse.postValue(loginResponse)
-                            Log.d("LoginResponse", "Datos cargados: $loginResponse")
                         }
                     }
                 } else {
@@ -91,7 +90,6 @@ class ViewModel(context: Context) : ViewModel() {
             }
         }
     }
-
 
 
     fun logout(nav: NavHostController) {

@@ -27,6 +27,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -47,12 +48,12 @@ import com.angelemv.android.pruebabbva.viewmodel.ViewModel
 
 @Composable
 fun LoginScreen(nav: NavHostController, viewModel: ViewModel) {
-    val email = remember { mutableStateOf("") }
-    val password = remember { mutableStateOf("") }
+    val email = rememberSaveable { mutableStateOf("") }
+    val password = rememberSaveable { mutableStateOf("") }
+    var showDialog by rememberSaveable { mutableStateOf(false) }
     val context = LocalContext.current
     val isFormValid = email.value.isNotEmpty() && password.value.isNotEmpty()
     val errorMessage = viewModel.errorMessage
-    var showDialog by remember { mutableStateOf(false) }
     val loginResponse = viewModel.loginResponse.observeAsState()
 
     LaunchedEffect(loginResponse.value) {

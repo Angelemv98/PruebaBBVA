@@ -22,6 +22,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -42,8 +43,8 @@ fun DashBoard(nav: NavHostController, viewModel: ViewModel) {
     val dogImage = viewModel.dogImage.observeAsState()
     val loginResponse = viewModel.loginResponse.observeAsState()
     val errorMessage = viewModel.errorMessage
-    var showDialog by remember { mutableStateOf(false) }
-    var showErrorDialog by remember { mutableStateOf(false) }
+    var showDialog by rememberSaveable { mutableStateOf(false) }
+    var showErrorDialog by rememberSaveable { mutableStateOf(false) }
 
     LaunchedEffect(Unit) {
         viewModel.loadUserData()
@@ -139,7 +140,6 @@ fun DashBoard(nav: NavHostController, viewModel: ViewModel) {
         }
     }
 }
-
 @Composable
 fun LogoutConfirmationDialog(onConfirm: () -> Unit, onDismiss: () -> Unit) {
     AlertDialog(

@@ -4,14 +4,14 @@ import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.core.intPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
-import com.angelemv.android.pruebabbva.model.LoginResponse
+import com.angelemv.android.pruebabbva.login.repository.LoginResponse
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
 
 val Context.dataStore by preferencesDataStore(name = "user_preferences")
 
-class UserPreferencesManager(private val context: Context) {
+class UserPreferencesManager(context: Context) {
 
     private val dataStore = context.dataStore
 
@@ -25,31 +25,6 @@ class UserPreferencesManager(private val context: Context) {
     val isLoggedIn: Flow<Boolean> = dataStore.data
         .map { preferences ->
             preferences[IS_LOGGED_IN] ?: false
-        }
-
-    val userName: Flow<String?> = dataStore.data
-        .map { preferences ->
-            preferences[USER_NAME]
-        }
-
-    val userLastName: Flow<String?> = dataStore.data
-        .map { preferences ->
-            preferences[USER_LAST_NAME]
-        }
-
-    val userId: Flow<String?> = dataStore.data
-        .map { preferences ->
-            preferences[USER_ID]
-        }
-
-    val userGender: Flow<String?> = dataStore.data
-        .map { preferences ->
-            preferences[USER_GENDER]
-        }
-
-    val userAge: Flow<Int?> = dataStore.data
-        .map { preferences ->
-            preferences[USER_AGE]
         }
 
     suspend fun getUserData(): LoginResponse? {

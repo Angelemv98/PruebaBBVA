@@ -1,4 +1,4 @@
-package com.angelemv.android.pruebabbva.views
+package com.angelemv.android.pruebabbva.login.ui
 
 import android.widget.Toast
 import androidx.compose.foundation.Canvas
@@ -26,12 +26,12 @@ import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Path
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
@@ -47,7 +47,10 @@ import com.angelemv.android.pruebabbva.R
 import com.angelemv.android.pruebabbva.viewmodel.ViewModel
 
 @Composable
-fun LoginScreen(nav: NavHostController, viewModel: ViewModel) {
+fun LoginScreen(
+    nav: NavHostController,
+    viewModel: ViewModel = ViewModel(context = LocalContext.current)
+) {
     val email = rememberSaveable { mutableStateOf("") }
     val password = rememberSaveable { mutableStateOf("") }
     var showDialog by rememberSaveable { mutableStateOf(false) }
@@ -82,7 +85,7 @@ fun LoginScreen(nav: NavHostController, viewModel: ViewModel) {
                 modifier = Modifier.size(100.dp)
             )
             Spacer(modifier = Modifier.height(60.dp))
-            
+
             Text(
                 "¡Bienvenid@!",
                 fontSize = 30.sp,
@@ -127,7 +130,7 @@ fun CurvedBackgroundScreen(content: @Composable () -> Unit) {
         modifier = Modifier.fillMaxSize()
     ) {
         Canvas(modifier = Modifier.fillMaxSize()) {
-            val path = androidx.compose.ui.graphics.Path().apply {
+            val path = Path().apply {
                 moveTo(0f, size.height)
                 cubicTo(
                     size.width * 0.25f, size.height * 1f,
@@ -173,6 +176,9 @@ fun GenericEditText(
     isEmail: Boolean = false
 ) {
     TextField(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(vertical = 8.dp),
         value = value.value,
         onValueChange = { value.value = it },
         label = { Text(label, color = Color.White) },
@@ -189,9 +195,6 @@ fun GenericEditText(
             unfocusedIndicatorColor = Color.Transparent
         ),
         shape = RoundedCornerShape(16.dp),
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(vertical = 8.dp)
     )
 }
 

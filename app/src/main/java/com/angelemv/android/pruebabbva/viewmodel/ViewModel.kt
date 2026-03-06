@@ -11,12 +11,12 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.NavHostController
-import com.angelemv.android.pruebabbva.model.LoginRequest
-import com.angelemv.android.pruebabbva.model.LoginResponse
-import com.angelemv.android.pruebabbva.model.navigation.AppScreens
-import com.angelemv.android.pruebabbva.model.network.DogResponse
-import com.angelemv.android.pruebabbva.model.network.DogRetrofitInstance
-import com.angelemv.android.pruebabbva.model.network.RetrofitInstance
+import com.angelemv.android.pruebabbva.login.repository.LoginRequest
+import com.angelemv.android.pruebabbva.login.repository.LoginResponse
+import com.angelemv.android.pruebabbva.navigation.AppScreens
+import com.angelemv.android.pruebabbva.dashboard.repository.DogResponse
+import com.angelemv.android.pruebabbva.dashboard.repository.DogRetrofitInstance
+import com.angelemv.android.pruebabbva.repositoryglobal.RetrofitInstance
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -27,7 +27,6 @@ class ViewModel(context: Context) : ViewModel() {
     val _dogImage = MutableLiveData<DogResponse?>()
     val dogImage: LiveData<DogResponse?> get() = _dogImage
 
-    private val _error = MutableLiveData<String?>()
     var errorMessage by mutableStateOf<String?>(null)
         private set
 

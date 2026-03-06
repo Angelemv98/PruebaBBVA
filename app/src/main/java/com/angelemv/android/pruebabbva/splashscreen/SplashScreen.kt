@@ -1,4 +1,4 @@
-package com.angelemv.android.pruebabbva.views
+package com.angelemv.android.pruebabbva.splashscreen
 
 import UserPreferencesManager
 import androidx.compose.foundation.Image
@@ -23,12 +23,14 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.angelemv.android.pruebabbva.R
-import com.angelemv.android.pruebabbva.model.navigation.AppScreens
+import com.angelemv.android.pruebabbva.navigation.AppScreens
 import kotlinx.coroutines.delay
 
 @Composable
-fun SplashScreen(nav: NavHostController, userPreferencesManager: UserPreferencesManager) {
-    val isLoggedIn = userPreferencesManager.isLoggedIn.collectAsState(initial = false)
+fun SplashScreen(nav: NavHostController, userPreferencesManager: UserPreferencesManager = UserPreferencesManager(nav.context)) {
+    val isLoggedIn = userPreferencesManager.isLoggedIn.collectAsState(
+        initial = false
+    )
 
     LaunchedEffect(key1 = isLoggedIn.value) {
         delay(2000)

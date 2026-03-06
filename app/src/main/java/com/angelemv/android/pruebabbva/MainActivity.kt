@@ -1,11 +1,11 @@
-package com.angelemv.android.pruebabbva.views
+package com.angelemv.android.pruebabbva
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
-import com.angelemv.android.pruebabbva.model.navigation.AppNavigation
+import com.angelemv.android.pruebabbva.navigation.AppNavigation
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

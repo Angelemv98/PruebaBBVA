@@ -1,5 +1,6 @@
-package com.angelemv.android.pruebabbva.model.network
+package com.angelemv.android.pruebabbva.repositoryglobal
 
+import com.angelemv.android.pruebabbva.login.repository.LoginSericeApi
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit

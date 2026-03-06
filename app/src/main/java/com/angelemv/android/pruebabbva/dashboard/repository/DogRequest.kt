@@ -1,4 +1,4 @@
-package com.angelemv.android.pruebabbva.model.network
+package com.angelemv.android.pruebabbva.dashboard.repository
 
 data class DogResponse(
     val message: String,

@@ -1,4 +1,4 @@
-package com.angelemv.android.pruebabbva.model.navigation
+package com.angelemv.android.pruebabbva.navigation
 
 sealed class AppScreens (val route: String) {
     object SplashScreen : AppScreens("splash_screen")

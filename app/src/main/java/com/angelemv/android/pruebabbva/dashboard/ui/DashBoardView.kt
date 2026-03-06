@@ -1,4 +1,4 @@
-package com.angelemv.android.pruebabbva.views
+package com.angelemv.android.pruebabbva.dashboard.ui
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
@@ -21,7 +21,6 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
@@ -35,11 +34,12 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import coil.compose.AsyncImage
+import com.angelemv.android.pruebabbva.login.ui.CurvedBackgroundScreen
 import com.angelemv.android.pruebabbva.viewmodel.ViewModel
 
 
 @Composable
-fun DashBoard(nav: NavHostController, viewModel: ViewModel) {
+fun DashBoard(nav: NavHostController, viewModel: ViewModel = ViewModel(context = LocalContext.current)) {
     val dogImage = viewModel.dogImage.observeAsState()
     val loginResponse = viewModel.loginResponse.observeAsState()
     val errorMessage = viewModel.errorMessage

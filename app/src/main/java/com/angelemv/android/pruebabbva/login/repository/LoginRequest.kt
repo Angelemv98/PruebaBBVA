@@ -1,4 +1,4 @@
-package com.angelemv.android.pruebabbva.model
+package com.angelemv.android.pruebabbva.login.repository
 
 data class LoginRequest(
     val username: String,

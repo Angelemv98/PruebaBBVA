@@ -1,7 +1,5 @@
-package com.angelemv.android.pruebabbva.model.network
+package com.angelemv.android.pruebabbva.login.repository
 
-import com.angelemv.android.pruebabbva.model.LoginRequest
-import com.angelemv.android.pruebabbva.model.LoginResponse
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.POST

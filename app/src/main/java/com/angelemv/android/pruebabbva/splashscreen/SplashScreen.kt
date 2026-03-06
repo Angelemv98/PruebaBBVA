@@ -27,7 +27,10 @@ import com.angelemv.android.pruebabbva.navigation.AppScreens
 import kotlinx.coroutines.delay
 
 @Composable
-fun SplashScreen(nav: NavHostController, userPreferencesManager: UserPreferencesManager = UserPreferencesManager(nav.context)) {
+fun SplashScreen(
+    nav: NavHostController,
+    userPreferencesManager: UserPreferencesManager = UserPreferencesManager(nav.context)
+) {
     val isLoggedIn = userPreferencesManager.isLoggedIn.collectAsState(
         initial = false
     )
@@ -43,7 +46,6 @@ fun SplashScreen(nav: NavHostController, userPreferencesManager: UserPreferences
     }
     Splash()
 }
-
 
 
 @Composable

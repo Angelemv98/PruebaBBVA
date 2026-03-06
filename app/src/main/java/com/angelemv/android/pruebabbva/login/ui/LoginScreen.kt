@@ -202,7 +202,5 @@ fun GenericEditText(
 @Composable
 fun LoginScreenPreview() {
     LoginScreen(
-        nav = NavHostController(context = LocalContext.current),
-        viewModel = ViewModel(context = LocalContext.current)
-    )
+        nav = NavHostController(context = LocalContext.current))
 }
